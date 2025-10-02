@@ -5,7 +5,7 @@ OBJ_DIR := obj
 
 NAME := webserver
 
-SRC := webserver.cpp main.cpp \
+SRC := $(shell find . -name "*.cpp")
 
 OBJ := $(patsubst ./%cpp, $(OBJ_DIR)/%.o, $(SRC))
 

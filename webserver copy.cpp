@@ -57,7 +57,7 @@ int pollout(int fd)
 	return success;
 }
 
-void WebServManager::runWebserv()
+string  Server::ConnectToServer()
 {
 	//create a socket;
 	char	request[2000];//buffer to fetch the client request text
@@ -82,6 +82,7 @@ void WebServManager::runWebserv()
 	if (tcpSocket < 0) {
         perror("socket");
 		cleanup_resources(fds, tcpSocket);
+        return "";
     }
 	/*bind the socket to an address and port
 	The address can be a specific IP (like 127.0.0.1 for local access only) 
@@ -89,6 +90,7 @@ void WebServManager::runWebserv()
     if (bind(tcpSocket, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
         perror("bind");
 		cleanup_resources(fds, tcpSocket);
+        return "";
     }
 	
 	//listen to request
@@ -96,6 +98,7 @@ void WebServManager::runWebserv()
 											//  At MAX_CLIENTS + 1 requests, listen will send an error to the client
 	{
 		std::cout<< errno << std::endl;
+		return NULL;
 	}
 
 	// Inizializza di fds(pollfd), tutti gli elementi a -1 (fd non valido)
@@ -126,6 +129,7 @@ void WebServManager::runWebserv()
 			else
 				std::cerr<<"Error:poll():ready < 0"<<std::endl;
 			cleanup_resources(fds, tcpSocket);
+			return "poll error";
 		}
 		else if (ready > 0)
 		{
@@ -146,6 +150,7 @@ void WebServManager::runWebserv()
 				if(client_fd == -1)
 				{
 					std::cout<< errno << std::endl;
+					return "";
 				}
 				for (i = 1; i < MAX_CLIENTS; i++) 
 				{
@@ -207,4 +212,5 @@ void WebServManager::runWebserv()
 			}
 	}
 
+	return "server terminated";
 }
