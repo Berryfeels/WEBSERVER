@@ -1,3 +1,6 @@
+#ifndef _TCPSOCKET
+# define _TCPSOCKET
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -8,6 +11,8 @@
 #include <poll.h>
 #include <fcntl.h>
 #include <memory>
+
+#include "webserv.class.hpp"
 
 class TCPSocket
 {
@@ -26,3 +31,5 @@ class TCPSocket
 		std::string readIncomingRequest();
 		bool writeData(const std::string &data);
 	};
+
+#endif

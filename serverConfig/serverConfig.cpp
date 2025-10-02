@@ -1,5 +1,6 @@
 create a vector of servers
 
+
 initialize servers
 
 create a socket for each port

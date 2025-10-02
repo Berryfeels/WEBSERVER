@@ -1,4 +1,4 @@
-#include "webserver.class.hpp"
+#include "webserv.class.hpp"
 using std::string;
 
 
@@ -17,7 +17,7 @@ void cleanup_resources(pollfd *fds, int tcpSocket)
 }
 
 // Signal handler function
-void handle_sigint(int signal) {
+void WebServManager::handle_sigint(int signal) {
     std::cout << "\nReceived signal " << signal << " (Ctrl+C)" << std::endl;
     signal_flag = false;
 }
