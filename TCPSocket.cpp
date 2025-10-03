@@ -14,7 +14,7 @@ TCPSocket::TCPSocket(int existing_fd) : fd_(existing_fd)
 // constructor for bind socket
 TCPSocket::TCPSocket()
 {
-	std:cout<<"Creating bind socket"<<std::endl;
+	std::cout<<"Creating bind socket"<<std::endl;
 	//_bind_socket = true;
 
 	// open socket
@@ -55,4 +55,9 @@ void TCPSocket::listenSocket()
 	   << inet_ntoa(address_.sin_addr)
 	   << " port: " << ntohs(address_.sin_port);
 	//DEBUG(ss.str());
+}
+
+int TCPSocket::getSocketFd()
+{
+	return fd_;
 }

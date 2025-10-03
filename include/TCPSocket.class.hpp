@@ -17,19 +17,23 @@
 class TCPSocket
 {
 	private:
-		sockaddr_in address_;
-		int fd_;
+		sockaddr_in	address_;
+		int			fd_;
 
 	public:
 		TCPSocket();
-		TCPSocket(int existing_fd);
+		TCPSocket(int existent_fd);
 		TCPSocket(const TCPSocket &source);
 		~TCPSocket();
 
-		void bindToAddress (const sockaddr_in &address);
-		void listenSocket();
-		std::string readIncomingRequest();
-		bool writeData(const std::string &data);
+		int			init_socket(const TCPSocket &socket);
+		void		bindToAddress (const sockaddr_in &address);
+		void		listenSocket();
+		std::string	readIncomingRequest();
+		bool		writeData(const std::string &data);
+
+		//GETTER
+		int getSocketFd();
 	};
 
 #endif
